@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./build/main.js" type="module" defer></script>
-    <link rel="stylesheet" type="text/css" href="./main.css">
+    <link rel="stylesheet" type="text/css" href="./style/main.css">
     <title>Motion Project</title>
 </head>
 <body>
@@ -13,36 +13,56 @@
         <div class="container_background">
             <div class="content_container">
                 <section class="content_menu">
-                    <header class="content_header">Motion</header>
-                    <div class="content_button_container">
-                        <button class="content_button">image</button>
-                        <button class="content_button">video</button>
-                        <button class="content_button">note</button>
-                        <button class="content_button">task</button>
-                    </div>
+                    <header class="content_header">
+                        <h1 class="content_header_title"> Motion</h1>
+                    </header>
+                    <ul class="content_button_container">
+                        <li><button id="new-image" class="content_button">image</button></li>
+                        <li><button id="new-video" class="content_button">video</button></li>
+                        <li><button id="new-note" class="content_button">note</button></li>
+                        <li><button id="new-task" class="content_button">task</button></li>
+                    </ul>
                 </section>
-                <section class="content_board_container">
-                    <div class="content_board--imageVideo">
-                        <div class="content_thumbnail">
-                            <img src="https://picsum.photos/500/300" />
-                        </div>
-                        <div class="content_text_container">
-                            <h2 class="content_title">title</h2>
-                        </div>
-                        <div class="content_remove">
-                            <button class="content_delete_btn">X</button>
-                        </div>
-                    </div>
-                    <div class="content_board-noteTask">
-                        <div class="content_text_container">
-                            <h2 class="content_title">title</h2>
-                            <p class="content_body">body</p>
-                        </div>
-                    </div>
-                </section>
+                <main class="content_board_container">
+                    <!-- ts part -->
+                    <!-- <ul class="page">
+                        <li class="content_board--imageVideo">
+                            <div class="content_thumbnail">
+                                <img src="https://picsum.photos/550/300" />
+                            </div>
+                            <div class="content_text_container">
+                                <h2 class="content_title">title</h2>
+                            </div>
+                            <div class="content_remove-imageVideo">
+                                <button class="content_delete_btn">X</button>
+                            </div>
+                        </li>
+                        <li class="content_board-noteTask">
+                            <div class="content_text_body_container">
+                                <h2 class="content_title">title</h2>
+                                <p class="content_body">body</p>
+                            </div>
+                            <div class="content_remove-noteTask">
+                                <button class="content_delete_btn">X</button>
+                            </div>
+                        </li>
+                        <li class="content_board-noteTask">
+                            <div class="content_text_body_container">
+                                <h2 class="content_title">title</h2>
+                                <p class="content_body">body</p>
+                            </div>
+                            <div class="content_remove-noteTask">
+                                <button class="content_delete_btn">X</button>
+                            </div>
+                        </li>
+                    </ul> -->
+                    <!-- ts part -->
+                </main>
             </div>
-
         </div>
+        <footer class="footer">
+            <p>© Copy right by HJPark. All rights reserved.</p>
+        </footer>
     </div>
 </body>
 </html>

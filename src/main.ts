@@ -1,20 +1,26 @@
+import { PageComponent } from "./component/page.js";
 
-type Notion = "image" | "video" | "note" | "task";
 
-type ArrayOfButton = HTMLElement[] | null | undefined;
+class App {
+    private readonly page: PageComponent;
+    constructor(appRoot: HTMLElement) {
+        this.page = new PageComponent();
+        this.page.attachTo(appRoot);
+    }
+};
 
-// class NotionImple implements Notion {
 
+new App(document.querySelector(".content_board_container")! as HTMLElement)
+
+// const btns = document.querySelectorAll<HTMLElement>(".content_button");
+
+
+// for(const item of btns) {
+//     item.addEventListener("click", selectType);
+
+//     function selectType() {
+//         console.log(item.innerHTML);
+    
+//     }
 // }
 
-const btns = document.querySelectorAll<HTMLElement>(".content_button");
-console.log(btns);
-
-for(const item of btns) {
-    item.addEventListener("click", start);
-
-    function start() {
-        console.log(item.nodeValue);
-    
-    }
-}

@@ -1,9 +1,9 @@
-"use strict";
-const btns = document.querySelectorAll(".content_button");
-console.log(btns);
-for (const item of btns) {
-    item.addEventListener("click", start);
-    function start() {
-        console.log(item.nodeValue);
+import { PageComponent } from "./component/page.js";
+class App {
+    constructor(appRoot) {
+        this.page = new PageComponent();
+        this.page.attachTo(appRoot);
     }
 }
+;
+new App(document.querySelector(".content_board_container"));

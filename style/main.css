@@ -79,6 +79,7 @@
     background-color: var(--accent-color);
     font-weight: 600;
     text-transform: uppercase;
+    border-radius: 5px;
 }
 
 /* board */
@@ -100,6 +101,7 @@
     display: flex;
     flex-direction:column;
     align-items: center;
+    list-style-type: none;
 }
 
 /* scrollbar */
@@ -112,14 +114,22 @@
 }
 
 /* card */
-
-.content_board--imageVideo,
-.content_board-noteTask {
+ul.page {
+    width: 100%;
+}
+li.page-item {
     width: 95%;
+    margin-bottom: 30px;
+}
+
+section.content_board--imageVideo,
+section.content_board-noteTask {
+    width: 100%;
     min-width: 1000px;
     min-height: 300px;
+    background-color: var(--document-bg-color);
     display: flex;
-    margin-bottom: 30px;
+    justify-content:center;
     position: relative;
 }
 
@@ -170,7 +180,6 @@
 }
 
 .content_remove-imageVideo {
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

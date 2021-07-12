@@ -4,13 +4,13 @@ import { ImageComponent } from "./component/page/item/image.js";
 import { NoteComponent } from "./component/page/item/note.js";
 import { TodoComponent } from "./component/page/item/todo.js";
 import { VideoComponent } from "./component/page/item/video.js";
-import { Composable, PageComponent } from "./component/page/page.js";
+import { Composable, PageComponent, PageItemComponent } from "./component/page/page.js";
 
 
 class App {
     private readonly page: Component & Composable;
     constructor(appRoot: HTMLElement) {
-        this.page = new PageComponent();
+        this.page = new PageComponent(PageItemComponent);
         
         const image = new ImageComponent('image Title', "https://picsum.photos/550/300")
         this.page.addChild(image);

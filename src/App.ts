@@ -31,15 +31,3 @@ class App {
 
 new App(document.querySelector(".content_board_container")! as HTMLElement)
 
-// const btns = document.querySelectorAll<HTMLElement>(".content_button");
-
-
-// for(const item of btns) {
-//     item.addEventListener("click", selectType);
-
-//     function selectType() {
-//         console.log(item.innerHTML);
-    
-//     }
-// }
-

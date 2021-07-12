@@ -14,9 +14,6 @@ export class VideoComponent extends BaseComponent<HTMLElement> {
                 <div class="content_text_container">
                     <h2 class="content_title"></h2>
                 </div>
-                <div class="content_remove-imageVideo">
-                    <button class="content_delete_btn">X</button>
-                </div>
             </section>
         `)
 

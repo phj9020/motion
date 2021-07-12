@@ -8,9 +8,6 @@ export class TodoComponent extends BaseComponent<HTMLElement> {
                     <h2 class="content_title">title</h2>
                     <input type="checkbox" class="todo-checkbox">
                 </div>
-                <div class="content_remove-noteTask">
-                    <button class="content_delete_btn">X</button>
-                </div>
             </section>
         `);
     

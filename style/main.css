@@ -118,6 +118,7 @@ ul.page {
     width: 100%;
 }
 li.page-item {
+    display: flex;
     width: 95%;
     margin-bottom: 30px;
 }
@@ -179,17 +180,10 @@ section.content_board-noteTask {
     margin-left: 20px;
 }
 
-.content_remove-imageVideo {
+.content_delete_container {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.content_remove-noteTask{
-    position: absolute;
-    right:0;
-    top: 50%;
-    transform: translate(0%, -50%);
 }
 
 .content_delete_btn{

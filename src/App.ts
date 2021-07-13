@@ -1,6 +1,7 @@
-
 import { Component } from "./component/component.js";
 import { InputDialog } from "./component/dialog/dialog.js";
+import { MediaInput } from "./component/dialog/input/media-input.js";
+import { TextInput } from "./component/dialog/input/text-input.js";
 import { ImageComponent } from "./component/page/item/image.js";
 import { NoteComponent } from "./component/page/item/note.js";
 import { TodoComponent } from "./component/page/item/todo.js";
@@ -10,40 +11,92 @@ import { Composable, PageComponent, PageItemComponent } from "./component/page/p
 
 class App {
     private readonly page: Component & Composable;
-    constructor(appRoot: HTMLElement) {
+    constructor(appRoot: HTMLElement, dialogRoot: HTMLElement) {
         this.page = new PageComponent(PageItemComponent);
         
-        const image = new ImageComponent('image Title', "https://picsum.photos/550/300")
-        this.page.addChild(image);
-
         const imageBtn = document.querySelector("#new-image")! as HTMLButtonElement;
         imageBtn.addEventListener("click", ()=> {
             const diablog = new InputDialog();
+            const mediaInput = new MediaInput();
+            
+            diablog.addChild(mediaInput);
+            diablog.attachTo(dialogRoot);
+            
             diablog.setOnCloseListener(()=> {
-                diablog.removeFrom(document.body);
+                diablog.removeFrom(dialogRoot);
             });
-
+            
             diablog.setOnSubmitListener(()=> {
-                // To do : submit 시 섹션 생성 후 페이지 추가 
-                diablog.removeFrom(document.body);
+                const image = new ImageComponent(mediaInput.title, mediaInput.url)
+                this.page.addChild(image);
+                diablog.removeFrom(dialogRoot);
             })
-
-            diablog.attachTo(document.body);
+            
+        });
+        const videoBtn = document.querySelector("#new-video")! as HTMLButtonElement;
+        videoBtn.addEventListener("click", ()=> {
+            const diablog = new InputDialog();
+            const mediaInput = new MediaInput();
+            
+            diablog.addChild(mediaInput);
+            diablog.attachTo(dialogRoot);
+            
+            diablog.setOnCloseListener(()=> {
+                diablog.removeFrom(dialogRoot);
+            });
+            
+            diablog.setOnSubmitListener(()=> {
+                const video = new VideoComponent(mediaInput.title, mediaInput.url)
+                this.page.addChild(video);
+                diablog.removeFrom(dialogRoot);
+            })
+            
+        });
+        const noteBtn = document.querySelector("#new-note")! as HTMLButtonElement;
+        noteBtn.addEventListener("click", ()=> {
+            const diablog = new InputDialog();
+            const mediaInput = new TextInput();
+            
+            diablog.addChild(mediaInput);
+            diablog.attachTo(dialogRoot);
+            
+            diablog.setOnCloseListener(()=> {
+                diablog.removeFrom(dialogRoot);
+            });
+            
+            diablog.setOnSubmitListener(()=> {
+                const note = new NoteComponent(mediaInput.title, mediaInput.body);
+                this.page.addChild(note);
+                diablog.removeFrom(dialogRoot);
+            })
         });
 
-        const note = new NoteComponent("note title", "this is body paragraphasdsadasdasd");
-        this.page.addChild(note);
-        
-        const todo = new TodoComponent('Todo Title', 'Todo Item');
-        this.page.addChild(todo);
+        const taskBtn = document.querySelector("#new-task")! as HTMLButtonElement;
+        taskBtn.addEventListener("click", ()=> {
+            const diablog = new InputDialog();
+            const mediaInput = new TextInput();
+            
+            diablog.addChild(mediaInput);
+            diablog.attachTo(dialogRoot);
+            
+            diablog.setOnCloseListener(()=> {
+                diablog.removeFrom(dialogRoot);
+            });
+            
+            diablog.setOnSubmitListener(()=> {
+                const task = new TodoComponent(mediaInput.title, mediaInput.body);
+                this.page.addChild(task);
+                diablog.removeFrom(dialogRoot);
+            })
+        });
 
-        const video = new VideoComponent("Video title", "https://youtu.be/8QKPLYpObd8")
-        this.page.addChild(video);
+        
+
 
         this.page.attachTo(appRoot);
     }
 };
 
 
-new App(document.querySelector(".content_board_container")! as HTMLElement)
+new App(document.querySelector(".content_board_container")! as HTMLElement, document.body);
 

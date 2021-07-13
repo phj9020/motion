@@ -128,6 +128,10 @@ li.page-item {
     margin-bottom: 30px;
 }
 
+li:hover{
+    cursor: pointer;
+}
+
 section.content_board--imageVideo,
 section.content_board-noteTask {
     width: 100%;
@@ -165,7 +169,6 @@ section.content_board-noteTask {
 
 .content_text_container {
     width: 50%;
-    /* min-width: 200px; */
 }
 
 .content_text_body_container {

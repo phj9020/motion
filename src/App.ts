@@ -17,15 +17,21 @@ class App {
     constructor(appRoot: HTMLElement, private dialogRoot: HTMLElement) {
         this.page = new PageComponent(PageItemComponent);
         
-        this.bindElementToDialog<MediaInput>("#new-image", MediaInput, (input: MediaInput) => new ImageComponent(input.title, input.url));
+        this.bindElementToDialog<MediaInput>("#new-image", MediaInput, (input: MediaData) => new ImageComponent(input.title, input.url));
 
-        this.bindElementToDialog<MediaInput>("#new-video", MediaInput, (input: MediaInput) => new VideoComponent(input.title, input.url));
+        this.bindElementToDialog<MediaInput>("#new-video", MediaInput, (input: MediaData) => new VideoComponent(input.title, input.url));
         
-        this.bindElementToDialog<TextInput>("#new-note", TextInput, (input: TextInput) => new NoteComponent(input.title, input.body));
+        this.bindElementToDialog<TextInput>("#new-note", TextInput, (input: TextData) => new NoteComponent(input.title, input.body));
         
-        this.bindElementToDialog<TextInput>("#new-task", TextInput, (input: TextInput) => new TodoComponent(input.title, input.body));
+        this.bindElementToDialog<TextInput>("#new-task", TextInput, (input: TextData) => new TodoComponent(input.title, input.body));
 
         this.page.attachTo(appRoot);
+        
+        //for demo
+        this.page.addChild(new ImageComponent("Image","https://picsum.photos/500/300?random=1" ));
+        this.page.addChild(new NoteComponent("Image","https://picsum.photos/500/300?random=1" ));
+        this.page.addChild(new ImageComponent("Image","https://picsum.photos/500/300?random=1" ));
+        this.page.addChild(new TodoComponent("Image","https://picsum.photos/500/300?random=1" ));
     }
 
     private bindElementToDialog<T extends (MediaData | TextData) & Component>(

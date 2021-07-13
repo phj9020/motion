@@ -19,7 +19,7 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
     private closeListener?: onCloseListener
     constructor() {
         super(`
-            <li class="page-item">
+            <li draggable="true" class="page-item">
                 <div class="content_delete_container">
                     <button class="content_delete_btn">X</button>
                 </div>
@@ -29,6 +29,15 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
         closeButton.onclick = () => {
             this.closeListener && this.closeListener();
         };
+
+        this.element.addEventListener("dragstart", (event:DragEvent) => {
+            this.onDragStart(event)
+        })
+        this.element.addEventListener("dragend", (event:DragEvent) => {
+            this.onDragEnd(event)
+
+        })
+
     }
     addChild(child: Component){
         // const container = this.element.querySelector(".page-item__body")! as HTMLElement;
@@ -37,13 +46,29 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
     setOnCloseListener(listener: onCloseListener){
         this.closeListener = listener;
     }
+    onDragStart(event : DragEvent){
+        console.log('dragstart', event.currentTarget)
+    }
+    onDragEnd(event : DragEvent){
+        console.log('dragend', event)
+
+    }
+
 }
+
+
 export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable{
     constructor(private pageItemContructor: SectionContainerConstructor) {
         super(`
             <ul class="page"></ul>
         `
         );
+        this.element.addEventListener("dragover", (event: DragEvent) => {
+            this.onDragOver(event);
+        });
+        this.element.addEventListener("drop", (event: DragEvent) => {
+            this.onDragDrop(event);
+        });
     }
     
     addChild(section: Component) {
@@ -55,4 +80,13 @@ export class PageComponent extends BaseComponent<HTMLUListElement> implements Co
         })
     }
     
+    onDragOver(event: DragEvent){
+        event.preventDefault();
+        console.log("dragover", event)
+    }
+
+    onDragDrop(event: DragEvent) {
+        event.preventDefault();
+        console.log("drop", event);
+    }
 }

@@ -1,5 +1,6 @@
 
 import { Component } from "./component/component.js";
+import { InputDialog } from "./component/dialog/dialog.js";
 import { ImageComponent } from "./component/page/item/image.js";
 import { NoteComponent } from "./component/page/item/note.js";
 import { TodoComponent } from "./component/page/item/todo.js";
@@ -14,6 +15,21 @@ class App {
         
         const image = new ImageComponent('image Title', "https://picsum.photos/550/300")
         this.page.addChild(image);
+
+        const imageBtn = document.querySelector("#new-image")! as HTMLButtonElement;
+        imageBtn.addEventListener("click", ()=> {
+            const diablog = new InputDialog();
+            diablog.setOnCloseListener(()=> {
+                diablog.removeFrom(document.body);
+            });
+
+            diablog.setOnSubmitListener(()=> {
+                // To do : submit 시 섹션 생성 후 페이지 추가 
+                diablog.removeFrom(document.body);
+            })
+
+            diablog.attachTo(document.body);
+        });
 
         const note = new NoteComponent("note title", "this is body paragraphasdsadasdasd");
         this.page.addChild(note);

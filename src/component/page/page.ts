@@ -14,6 +14,7 @@ interface SectionContainer extends Component, Composable {
     setOnDragStateListener(listener:onDragListener<SectionContainer>) : void;
     muteChildren(state: 'mute' | 'unmute'): void;
     getBoundingRect() : DOMRect;
+    onDropped(): void;
 }
 
 type SectionContainerConstructor = {
@@ -59,16 +60,20 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
     }
 
     onDragStart(_ : DragEvent){
-        this.notifyDragObservers('start')
+        this.notifyDragObservers('start');
+        this.element.classList.add("lifted");
     }
     onDragEnd(_ : DragEvent){
-        this.notifyDragObservers('stop')
+        this.notifyDragObservers('stop');
+        this.element.classList.remove("lifted");
     }
     onDragEnter(_ : DragEvent){
-        this.notifyDragObservers('enter')
+        this.notifyDragObservers('enter');
+        this.element.classList.add("drop-area");
     }
     onDragLeave(_ : DragEvent){
-        this.notifyDragObservers('leave')
+        this.notifyDragObservers('leave');
+        this.element.classList.remove("drop-area");
     }
 
     notifyDragObservers(state:DragState){
@@ -87,6 +92,9 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
     }
     getBoundingRect() : DOMRect {
         return this.element.getBoundingClientRect();
+    }
+    onDropped() {
+        this.element.classList.remove("drop-area");
     }
 }
 
@@ -169,6 +177,9 @@ export class PageComponent extends BaseComponent<HTMLUListElement> implements Co
             this.dragTarget?.removeFrom(this.element);
             this.dropTarget.attach(this.dragTarget, dropY < srcElement.y ? "beforebegin" : "afterend");
         }
+
+        // "drop-area" remove 알려주자 
+        this.dropTarget.onDropped();
     }
 
     private updateSections(state: 'mute' | 'unmute') {

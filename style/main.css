@@ -311,3 +311,9 @@ textarea {
     margin: 20px 0px 10px 0px;
     border-radius: 5px;
 }
+
+/* 드래그 앤드롭 */
+
+.mute-children * {
+    pointer-events: none;
+}

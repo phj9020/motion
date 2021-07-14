@@ -13,6 +13,7 @@ interface SectionContainer extends Component, Composable {
     setOnCloseListener(listener: onCloseListener): void;
     setOnDragStateListener(listener:onDragListener<SectionContainer>) : void;
     muteChildren(state: 'mute' | 'unmute'): void;
+    getBoundingRect() : DOMRect;
 }
 
 type SectionContainerConstructor = {
@@ -84,11 +85,15 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
             this.element.classList.remove('mute-children');
         }
     }
+    getBoundingRect() : DOMRect {
+        return this.element.getBoundingClientRect();
+    }
 }
 
 
 export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable{
     //save state
+    // children : set all li 
     private children = new Set<SectionContainer>();
     private dragTarget?: SectionContainer;
     private dropTarget?: SectionContainer;
@@ -154,10 +159,15 @@ export class PageComponent extends BaseComponent<HTMLUListElement> implements Co
         if(!this.dropTarget) {
             return;
         }
-        // 드롭타겟이 있고 현재 드래그타겟과 드롭타겟이 일치하지 않는다면 위치를 바꾸자 
+        // 드래그타겟이 있고 현재 드래그타겟과 드롭타겟이 일치하지 않는다면 위치를 바꾸자 
         if(this.dragTarget && this.dragTarget !== this.dropTarget) {
+            const dropY = event.clientY;
+            const srcElement = this.dragTarget.getBoundingRect();
+            console.log(srcElement)
+            console.log("drop.Y", dropY)
+
             this.dragTarget?.removeFrom(this.element);
-            this.dropTarget.attach(this.dragTarget, "beforebegin");
+            this.dropTarget.attach(this.dragTarget, dropY < srcElement.y ? "beforebegin" : "afterend");
         }
     }
 
